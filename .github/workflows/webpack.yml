@@ -1,4 +1,4 @@
-name: Deploy Webpack App to GitHub page
+name: Deploy Webpack to GitHub page
 
 on:
   push:
@@ -7,21 +7,20 @@ on:
   workflow_dispatch:
 
 permission:
-  contents:write
+  contents: write
   
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    -name: Checkout repository
-     uses: actions/checkout@v4
+      -name: Checkout repository
+       uses: actions/checkout@v4
 
-    - name: Setup Node.js
+      - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: 18
-        cache: npm
 
     - name: install dependencies
       run: npm install
@@ -29,10 +28,10 @@ jobs:
     - name: build project
        run: npm run build
 
-    - name: deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with: 
-        github_token: ${{secrets.GITHUB_
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
        
         
